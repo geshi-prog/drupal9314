@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  drupal:
+    image: drupal:9.3.14-php8.1-apache
+    ports:
+      - 8080:80
+    volumes:
+      - ./drupal/www/html/modules:/var/www/html/modules
+      - ./drupal/www/html/profiles:/var/www/html/profiles
+      - ./drupal/www/html/themes:/var/www/html/themes
+      - ./drupal/www/html/sites:/var/www/html/sites
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:5.8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    restart: always
